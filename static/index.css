@@ -1,0 +1,148 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+body{
+    background: rgba(0,0,0,0.6) url('food.jpg') center center fixed;
+    background-size: cover;
+    background-blend-mode: darken;
+}
+
+.container{
+    margin: auto;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.container h1{
+    background: linear-gradient(orange,white,green);
+    font-weight: 700;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+.navbar ul li{
+    display: inline-block;
+    list-style: none;
+    margin: 0 20px;
+}
+
+.navbar ul li a{
+    padding: 9px;
+    text-decoration: none;
+    color: #fff;
+    font-size: 20px;
+    transition: 1s;
+}
+
+.navbar ul li a:hover{
+    background-color: rgb(36,131,4);
+}
+
+.content{
+    position: absolute;
+    color: #fff;
+    margin-top: 8%;
+    margin-left: 35%;
+}
+
+.content h1{
+    font-size: 50px;
+    margin-bottom: 5%;
+}
+
+.content span{
+    color: orange;
+}
+
+.content a{
+    margin-left: 30px;
+    padding: 15px;
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+    background-color: green
+}
+
+.content .menu-color{
+    background-color: orange;
+    padding: 15px;
+}
+
+.spinner{
+    margin-left: 20%;
+    margin-top: 9%;
+    width: 150px;
+    height: 150px;
+    animation: Morph 1s infinite;
+}
+
+@keyframes Morph{
+    0%,
+    100% {
+        border-radius: 50%;
+        transform: rotate(0deg);
+        background-color: orange;
+    }
+    50%{
+        border-radius: 0%;
+        transform: rotate(100deg);
+        background-color: green;
+    }
+}
+
+.content2{
+    flex-basis: 50%;
+    position: absolute;
+    left: 20%;
+    top: 65%;
+}
+
+.content2 h5{
+    color: greenyellow;
+    font-size: 25px;
+}
+
+.content2 p{
+    color: #fff;
+    font-size: 14px;
+    line-height: 15px;
+}
+
+.img{
+    width: 200px;
+    height: 220px;
+    display: inline-block;
+    border-radius: 15px;
+    padding: 15px 25px;
+    box-sizing: border-box;
+    cursor: pointer;
+    margin: 10px 15px;
+    background-position: center;
+    background-size: cover;
+    transition: transform 1s;
+}
+
+.img1{
+    background-image: url('indian food.jpg');
+}
+
+.img2{
+    background-image: url('burger.jpg');
+}
+
+.img3{
+    background-image: url('pizza.jpg');
+}
+
+.img4{
+    background-image: url('desi bhoj.jpg');
+}
+
+.img:hover{
+    transform: translateX(-8px) translateY(-15px);
+}

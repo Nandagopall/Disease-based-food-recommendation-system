@@ -1,0 +1,14 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+body{
+    background: rgba(0,0,0,0.6) url('new.jpg') center center fixed;
+    background-size: cover;
+    background-blend-mode: darken;
+}
+body {
+  color: white;
+}

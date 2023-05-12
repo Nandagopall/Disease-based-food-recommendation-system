@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Recommendation - Result</title>
+    <link href="{{ url_for('static', filename='index.css') }}" type="text/css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>FOOD RECOMMENDATION - RESULT</h1>
+        <div class="navbar">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="web.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="content">
+        <h1>Meal Plan</h1>
+        {% set meals = meal_plan.split("\n\n") %}
+        {% for meal in meals %}
+            {% set day_meals = meal.split("\n") %}
+            <div class="meal-day">
+                <h2>{{ day_meals[0] }}</h2>
+                {% for option in day_meals[1:] %}
+                    <div class="meal-option">
+                        &bull; {{ option }}
+                    </div>
+                {% endfor %}
+            </div>
+            <br><br> <!-- Add two new lines between days -->
+        {% endfor %}
+    </div>
+</body>
+</html>

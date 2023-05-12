@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Recommendation</title>
+    <link href="{{ url_for('static', filename='index.css') }}" type="text/css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>FOOD RECOMMENDATION</h1>
+        <div class="navbar">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="web.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="content">
+        <h1>Let's Check It</h1>
+        <form action="/process_input" method="post" id="input-form">
+            <label for="glucose">Enter your glucose level:</label>
+            <input type="number" name="glucose" id="glucose"><br><br>
+
+            <label for="bloodPressure">Enter your Blood pressure:</label>
+            <input type="number" name="bloodPressure" id="bloodPressure"><br><br>
+
+            <label for="insulin">Insulin:</label>
+            <select name="insulin" id="insulin">
+                <option value="yes">yes</option>
+                <option value="no">no</option>
+            </select><br><br>
+
+            <label for="age">Enter your age:</label>
+            <input type="number" name="age" id="age"><br><br>
+
+            <label for="sex">Enter your sex:</label>
+            <select name="sex" id="sex">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select><br><br>
+
+            <label for="height">Enter your height in cm:</label>
+            <input type="number" name="height" id="height"><br><br>
+
+            <label for="weight">Enter your weight in kg:</label>
+            <input type="number" name="weight" id="weight"><br><br>
+
+            <label for="geneticPedigree">Does anyone in your family have blood pressure?</label>
+            <select name="geneticPedigree" id="geneticPedigree">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select><br><br>
+
+            <label for="diabetesPedigreeFunction">Does anyone in your family have diabetes?</label>
+            <select name="diabetesPedigreeFunction" id="diabetesPedigreeFunction">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select><br><br>
+
+            <label for="hemoglobinLevel">Level of hemoglobin:</label>
+            <input type="number" name="hemoglobinLevel" id="hemoglobinLevel"><br><br>
+
+            <label for="smoking">Do you smoke?</label>
+            <select name="smoking" id="smoking">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select><br><br>
+
+            <label for="physicalActivity">Are you physically active?</label>
+            <select name="physicalActivity" id="physicalActivity">
+                <option value="sedentary">Not Active</option>
+                <option value="lightly active">Lightly Active</option>
+                <option value="moderately active">Moderately Active</option>
+                <option value="very active">Very Active</option>
+                <option value="extra active">Extra Active</option>
+            </select><br><br>
+
+            <button type="submit">Submit</button>
+        </form>
+        <br><br>
+    </body>
+    </html>
+           <!--<a href="result.html">Submit</a> -->
+    </div>
+
+    <div class="spinner"></div>
+
+    <div class="content2">
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('input-form');
+
+            form.addEventListener('submit', function (event) {
+              event.preventDefault();
+
+              const data = {
+                glucose: form.elements.glucose.value,
+                bloodPressure: form.elements.bloodPressure.value,
+                insulin: form.elements.insulin.value,
+                age: form.elements.age.value,
+                sex: form.elements.sex.value,
+                height: form.elements.height.value,
+                weight: form.elements.weight.value,
+                geneticPedigree: form.elements.geneticPedigree.value,
+                diabetesPedigreeFunction: form.elements.diabetesPedigreeFunction.value,
+                hemoglobinLevel: form.elements.hemoglobinLevel.value,
+                smoking: form.elements.smoking.value,
+                physicalActivity: form.elements.physicalActivity.value
+              };
+
+              fetch('/process_input', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+              })
+                .then(function (response) {
+                  if (!response.ok) {
+                    throw new Error('Failed to process the input data.');
+                  }
+                  return response.json();
+                })
+                .then(function (data) {
+                  // Process the response data
+                  console.log(data);
+
+                  // Redirect to the result page with the meal plan
+                  window.location.href = '/result?meal_plan=' + encodeURIComponent(data.meal_plan);
+                })
+                .catch(function (error) {
+                  // Handle any errors
+                  console.error(error);
+                });
+            });
+          });
+
+    </script>
+
+    </body>
+</html>
