@@ -7,7 +7,7 @@ The system takes user inputs and predict if they have pressure or diabetes and b
 to run the application
 1. change the directory to the path in which the app.py is located
 2. install all the requirements       using
-                                   ```shell
+                                   ```
 pip install -r requirements.txt
 3. run all the python programs in training programs folder (optional only if encountered error about joblib files)
 4. run the python program app.py
