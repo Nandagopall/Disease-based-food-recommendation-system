@@ -1,38 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food Recommendation - Result</title>
-    <link href="{{ url_for('static', filename='index.css') }}" type="text/css" rel="stylesheet">
+    <title>food recommendation</title>
+    <link rel="stylesheet" href="web.css">
 </head>
 <body>
     <div class="container">
-        <h1>FOOD RECOMMENDATION - RESULT</h1>
+        <h1>ABOUT US...</h1>
         <div class="navbar">
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="web.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="content">
-        <h1>Meal Plan</h1>
-        {% set meals = meal_plan.split("\n\n") %}
-        {% for meal in meals %}
-            {% set day_meals = meal.split("\n") %}
-            <div class="meal-day">
-                <h2>{{ day_meals[0] }}</h2>
-                {% for option in day_meals[1:] %}
-                    <div class="meal-option">
-                        &bull; {{ option }}
-                    </div>
-                {% endfor %}
-            </div>
-            <br><br> <!-- Add two new lines between days -->
-        {% endfor %}
-    </div>
-</body>
-</html>
+            <p class="text">
+
+            Welcome to our disease-based food recommendation system, where we help you make informed choices about what to eat based on your health condition. Our team of nutrition experts and healthcare professionals has carefully curated a database of recommended foods for various diseases, including diabetes, heart disease, and obesity.
+
+Our mission is to provide you with personalized food recommendations that can help you manage your condition and improve your overall health and well-being. We understand that making dietary changes can be challenging, especially when dealing with a health condition, which is why we're here to guide and support you every step of the way.
+
+Our recommendations are based on the latest scientific research and are designed to be both delicious and nutritious. We believe that eating healthy doesn't have to be boring or tasteless, and we strive to show you how to incorporate a wide variety of delicious and satisfying foods into your diet.
+
+We're committed to providing you with the highest level of service and support, and we welcome your feedback and suggestions. Thank you for choosing our disease-based food recommendation system to help you achieve your health goals.
+
+          </p>

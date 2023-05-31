@@ -1,9 +1,10 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
+from sklearn.svm import SVC
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import make_pipeline
+from sklearn.metrics import accuracy_score
 from joblib import dump
 
 # Load the dataset
@@ -32,13 +33,21 @@ X_train, X_test, y_train, y_test = train_test_split(
 # Define the preprocessing pipeline
 preprocessor = make_pipeline(SimpleImputer(strategy="mean"), StandardScaler())
 
-# Preprocess the training data
+# Preprocess the training and testing data
 X_train_preprocessed = preprocessor.fit_transform(X_train)
+X_test_preprocessed = preprocessor.transform(X_test)
 
-# Train the Logistic Regression model
-model = LogisticRegression()
-model.fit(X_train_preprocessed, y_train)
+# Train the SVM model
+svm_model = SVC()
+svm_model.fit(X_train_preprocessed, y_train)
+
+# Predict labels for the test data
+y_pred = svm_model.predict(X_test_preprocessed)
+
+# Calculate the accuracy
+accuracy = accuracy_score(y_test, y_pred)
+print("Accuracy:", accuracy)
 
 # Save the model and preprocessing pipeline
-dump((preprocessor, model), "diabetes_model.joblib")
+dump((preprocessor, svm_model), "diabetes_model.joblib")
 print("Saved")

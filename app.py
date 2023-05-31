@@ -18,6 +18,16 @@ def index():
     return render_template("index.html")
 
 
+@app.route("/about")
+def about():
+    return render_template("web.html")
+
+
+@app.route("/web")
+def contact():
+    return render_template("contact.html")
+
+
 @app.route("/result", methods=["GET"])
 def result():
     meal_plan = request.args.get("meal_plan")
