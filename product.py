@@ -8,12 +8,11 @@ import diapress_food
 def generate_meal_plan(user_data):
     glucose = int(user_data.get("glucose"))
     bp = int(user_data.get("bloodPressure"))
-    insulin = str(user_data.get("insulin"))
+    insulin = int(user_data.get("insulin"))
     age = int(user_data.get("age"))
     sex = str(user_data.get("sex"))
     height = float(user_data.get("height"))
     weight = float(user_data.get("weight"))
-    bpf = str(user_data.get("geneticPedigree"))
     hemogoblin = float(user_data.get("hemoglobinLevel"))
     smoking = str(user_data.get("smoking"))
     physical_activity = str(user_data.get("physicalActivity"))
@@ -26,7 +25,7 @@ def generate_meal_plan(user_data):
     height_t = height / 100
     bmi = weight / (height_t**2)
     if dpf.lower() == "yes":
-        dpf = 1
+        dpf = 0.7
     else:
         dpf = 0
 
@@ -45,11 +44,6 @@ def generate_meal_plan(user_data):
         bpf = 0.7
     else:
         bpf = 0
-
-    if insulin.lower() == "yes":
-        insulin = 1
-    else:
-        insulin = 0
 
     if sexf.lower() == "male":
         sex = 1
@@ -72,8 +66,9 @@ def generate_meal_plan(user_data):
             "Age": [age],
         }
     )
+    new_data_pre = preprocessor.transform(new_data)
 
-    prediction = model.predict(new_data)
+    prediction = model.predict(new_data_pre)
 
     if prediction == 1:
         has_diabetes = True
@@ -217,12 +212,7 @@ def generate_meal_plan(user_data):
                 calcium = int(random_food["calcium"])
                 fiber = float(random_food["fiber"])
 
-                good_food = diapress_food.diapress_food(
-                    sodium,
-                    potassium,
-                    magnesium,
-                    calcium,
-                    fiber,
+                good_food = diapress_food.pressure_food(
                     sodium,
                     potassium,
                     magnesium,
@@ -255,8 +245,9 @@ def generate_meal_plan(user_data):
 
     if has_pressure and has_diabetes == False:
         meal_plan = ""
+        meal_plan += "You may have High Blood Pressure\n\n"
         for day in range(1, 8):
-            meal_plan += f"Day {day}:\n"
+            meal_plan += f"Day {day}\n"
             breakfast = meal("breakfast", has_diabetes, has_pressure, max)
             lunch = meal("lunch", has_diabetes, has_pressure, max)
             dinner = meal("dinner", has_diabetes, has_pressure, max)
@@ -266,8 +257,14 @@ def generate_meal_plan(user_data):
             meal_plan += f"\tDinner : {dinner['name']}\n\n"
     else:
         meal_plan = ""
+        if has_diabetes and has_pressure:
+            meal_plan += "You may have Diabetes and High Blood Pressure\n\n"
+        elif has_diabetes:
+            meal_plan += "You may have Diabetes\n\n"
+        else:
+            meal_plan += "You don't have diabetes and High blood pressure\n\n"
         for day in range(1, 8):
-            meal_plan += f"Day {day}:\n"
+            meal_plan += f"Day {day}\n"
             breakfast = meal("breakfast", has_diabetes, has_pressure, max)
             lunch = meal("lunch", has_diabetes, has_pressure, max)
             dinner = meal("dinner", has_diabetes, has_pressure, max)
@@ -297,7 +294,7 @@ def generate_meal_plan(user_data):
 # user_data = {
 #     "glucose": 120,
 #     "bloodPressure": 80,
-#     "insulin": "no",
+#     "insulin": 120,
 #     "age": 40,
 #     "sex": "female",
 #     "height": 165,
@@ -310,4 +307,3 @@ def generate_meal_plan(user_data):
 # }
 
 # meal_plan = generate_meal_plan(user_data)
-# print(meal_plan)

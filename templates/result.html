@@ -9,27 +9,34 @@
 </head>
 <body>
     <div class="container">
-        <h1>THE RECOMMENDED FOODS ARE </h1>
+        <h1>FOOD RECOMMENDATIONS
+            <!--<br>---------------------------------------------------->
+
+        </h1>
         <div class="navbar">
         </div>
     </div>
     <div class="content">
-        <h1>--------------------------------------------------</h1>
         {% set meals = meal_plan.split("\n\n") %}
+        {% set first_line = meals[0].split("\n")[0] %}
+        <h2>{{ first_line }}</h2>
+        <br>
         {% for meal in meals %}
-            {% set day_meals = meal.split("\n") %}
-            <div class="meal-day">
-                <h2>{{ day_meals[0] }}</h2>
-                {% for option in day_meals[1:] %}
-                    <div class="meal-option">
-                        {% if loop.index == 1 %}
-                            <br>
-                        {% endif %}
-                        &bull; {{ option }}
-                    </div>
-                {% endfor %}
-            </div>
-            <br><br>
+            {% set day_info = meal.split("\n")[0] %}
+            {% set day_meals = meal.split("\n")[1:] %}
+            {% if loop.index > 1 %}
+                <div class="meal-day">
+                    <h3>{{ day_info }}
+                    </h3>
+                    <br>
+                    {% for option in day_meals %}
+                        <div class="meal-option">
+                            <h4>{{ option }}</h4>
+                        </div>
+                    {% endfor %}
+                </div>
+                <br><br>
+            {% endif %}
         {% endfor %}
     </div>
 </body>
